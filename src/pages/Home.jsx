@@ -1,20 +1,29 @@
-import { Banner } from "../components/Banner";
-import { Cards } from "../components/Cards";
-import PropTypes from 'prop-types'
+import Banner from "../components/Banner";
+import Card  from "../components/Card";
+import PropTypes from "prop-types";
 
+export default function Home({ data }) {
+    const background = "src/assets/images/Image-source-1.jpg";
+    const title = "Chez vous, partout et ailleurs";
 
-export function Home({data}) {
-  const background = "src/assets/images/Image-source-1.jpg"
-  const figcaption = "Chez vous, partout et ailleurs"
-
-  return <>
-    <Banner background={background} caption={figcaption}/>
-    <section className="home_content">
-      <Cards data={data}/>
-    </section>  
-  </>
+    return (
+        <>
+            <Banner background={background} title={title}/>
+            <section className="home_content">
+              {data.fetchedData && (
+                  <div className="card-list">
+                      {data.fetchedData.map((annonce) => (
+                          <Card key={annonce.id} link={`/annonce/${annonce.id}`} title={annonce.title} cover={annonce.cover} data={annonce}/>
+                      ))}
+                  </div>
+              )}
+            </section>
+        </>
+    );
 }
 
 Home.propTypes = {
-  data: PropTypes.array
-}
+    data: PropTypes.array,
+};
+
+
