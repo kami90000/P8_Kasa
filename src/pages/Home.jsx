@@ -10,9 +10,9 @@ export default function Home({ data }) {
         <>
             <Banner background={background} title={title}/>
             <section className="home_content">
-              {data.fetchedData && (
+              {data && (
                   <div className="card-list">
-                      {data.fetchedData.map((annonce) => (
+                      {data.map((annonce) => (
                           <Card key={annonce.id} link={`/annonce/${annonce.id}`} title={annonce.title} cover={annonce.cover} data={annonce}/>
                       ))}
                   </div>
